@@ -342,7 +342,7 @@ class _RegisterViewState extends State<RegisterView> {
                             controller: customerNumber,
                             style: const TextStyle(color: Colors.black),
                             decoration: _customInputDecoration(
-                              "Masukan No. Pelanggan",
+                              "Masukan NIK",
                             ),
                             validator: (v) =>
                                 selectedRole == "CUSTOMER" && v!.isEmpty

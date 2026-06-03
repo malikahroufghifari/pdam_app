@@ -162,20 +162,14 @@ class _CustomerViewState extends State<CustomerView> {
                                     width: 48,
                                     decoration: BoxDecoration(
                                       color: const Color(
-                                        0x7FD0E7FF,
-                                      ), // Transparansi biru muda soft sesuai mockup
-                                      borderRadius: BorderRadius.circular(14),
-                                      border: Border.all(
-                                        color: const Color(
-                                          0xFF7DD3FC,
-                                        ).withOpacity(0.5),
-                                        width: 1,
-                                      ),
+                                        0xFF50A7F9,
+                                      ).withOpacity(0.7),
+                                      borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: const Icon(
                                       Icons.add,
-                                      color: Color(0xFF0F172A),
-                                      size: 26,
+                                      color: Colors.black,
+                                      size: 24,
                                     ),
                                   ),
                                 ),

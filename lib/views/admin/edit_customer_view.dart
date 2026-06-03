@@ -57,6 +57,8 @@ class _EditCustomerViewState extends State<EditCustomerView> {
       selectedServiceId = existing["service_id"]?.toString();
       isDataLoaded = true;
     }
+    final String customerId = existing["id"]?.toString() ?? "0";
+    final String formattedCustId = "#CUST-${customerId.padLeft(4, '0')}";
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -73,6 +75,55 @@ class _EditCustomerViewState extends State<EditCustomerView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // --- CARD CUSTOMER (SESUAI DESAIN MOCKUP) ---
+Container(
+  width: double.infinity,
+  padding: const EdgeInsets.all(16),
+  margin: const EdgeInsets.only(bottom: 24),
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(16),
+    border: Border.all(color: const Color(0xFFCBD5E1)),
+  ),
+  child: Row(
+    children: [
+      CircleAvatar(
+        radius: 32,
+        backgroundColor: const Color(0xFFE2E8F0), // <-- Sudah diperbaiki ke abu-abu terang yang valid
+        child: const Icon(
+          Icons.person, 
+          size: 36, 
+          color: Color(0xFF94A3B8),
+        ),
+      ),
+      const SizedBox(width: 16),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              nameCtrl.text,
+              style: const TextStyle(
+                fontSize: 20, 
+                fontWeight: FontWeight.w800, 
+                color: Color(0xFF0F172A),
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              formattedCustId,
+              style: const TextStyle(
+                fontSize: 14, 
+                fontWeight: FontWeight.w600, 
+                color: Color(0xFF64748B),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+),
                       buildInputField(label: "Nama Lengkap", controller: nameCtrl),
                       buildInputField(label: "No. Telepon", controller: phoneCtrl),
                       buildInputField(label: "No. Pelanggan", controller: customerNumberCtrl),
@@ -105,14 +156,18 @@ class _EditCustomerViewState extends State<EditCustomerView> {
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF88CEFE),
-                        foregroundColor: Colors.white,
-                        elevation: 0,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                      ),
+                        backgroundColor: Colors.white,
+                            elevation: 0,
+                            side: const BorderSide(color: Color(0xFF0056C6)),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
                       onPressed: () => Navigator.pop(context, false),
-                      child: const Text("Batal", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+                      child: const Text(
+                            "Batal",
+                            style: TextStyle(color: Color(0xFF0056C6),fontWeight: FontWeight.w700, fontSize: 16),),
                     ),
                   ),
                   const SizedBox(width: 16),

@@ -4,9 +4,6 @@ import 'package:pdam_app/views/admin/tambah_service_view.dart';
 import 'package:pdam_app/widgets/alert.dart';
 import 'package:pdam_app/widgets/bottom_nav.dart';
 
-// ==========================================
-// SCREEN UTAMA: DAFTAR LAYANAN
-// ==========================================
 class ServiceView extends StatefulWidget {
   const ServiceView({super.key});
 
@@ -20,7 +17,6 @@ class _ServiceViewState extends State<ServiceView> {
   List filteredServices = [];
   bool isLoading = true;
 
-  // Controllers khusus untuk Modal Edit Layanan
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController minUsageCtrl = TextEditingController();
   TextEditingController maxUsageCtrl = TextEditingController();
@@ -56,7 +52,6 @@ class _ServiceViewState extends State<ServiceView> {
     });
   }
 
-  // Widget Helper Input Field Kustom untuk Form Edit Layanan
   Widget buildEditInputField({
     required String label,
     required TextEditingController controller,
@@ -114,7 +109,6 @@ class _ServiceViewState extends State<ServiceView> {
     );
   }
 
-  // MODAL BOTTOM SHEET KHUSUS EDIT LAYANAN (Sesuai Gambar Services (2).png)
   void showEditForm(Map existing) {
     nameCtrl.text = existing["name"] ?? "";
     minUsageCtrl.text = existing["min_usage"].toString();
@@ -160,13 +154,12 @@ class _ServiceViewState extends State<ServiceView> {
                     "Edit Layanan",
                     style: TextStyle(
                       fontSize: 22,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w700,
                       color: Color(0xFF1E293B),
                     ),
                   ),
                   const SizedBox(height: 16),
 
-                  // Banner Informasi dengan Logo PDAM Baru Anda
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
@@ -216,9 +209,8 @@ class _ServiceViewState extends State<ServiceView> {
                           ),
                         ),
                         const SizedBox(width: 12),
-                        // Ganti baris Image.asset di kode Edit Layanan Anda menjadi seperti ini:
                         Image.asset(
-                          'assets/PDAMappLogo.png', // Sesuaikan dengan yang ada di pubspec.yaml
+                          'assets/PDAMappLogo.png', 
                           height: 65,
                           fit: BoxFit.contain,
                           errorBuilder: (context, error, stackTrace) {
@@ -312,7 +304,7 @@ class _ServiceViewState extends State<ServiceView> {
                     ],
                   ),
 
-                  // Box Preview Tagihan Khusus Mode Edit
+                  // Edit
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
@@ -363,9 +355,9 @@ class _ServiceViewState extends State<ServiceView> {
                       Expanded(
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF88CEFE),
-                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.white,
                             elevation: 0,
+                            side: const BorderSide(color: Color(0xFF0056C6)),
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -374,7 +366,7 @@ class _ServiceViewState extends State<ServiceView> {
                           onPressed: () => Navigator.pop(ctx),
                           child: const Text(
                             "Batal",
-                            style: TextStyle(fontWeight: FontWeight.w700),
+                            style: TextStyle(color: Color(0xFF0056C6),fontWeight: FontWeight.w700),
                           ),
                         ),
                       ),
@@ -428,7 +420,6 @@ class _ServiceViewState extends State<ServiceView> {
     );
   }
 
-  // DIALOG CONFIRM DELETE (Sesuai Gambar Services (1).png)
   void confirmDelete(int id, String serviceName) {
     showDialog(
       context: context,
@@ -447,8 +438,8 @@ class _ServiceViewState extends State<ServiceView> {
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
-                  Icons.delete_outline,
-                  color: Color(0xFFDC2626),
+                  Icons.delete_outlined,
+                  color: Color(0xFFBA1A1A),
                   size: 40,
                 ),
               ),
@@ -497,7 +488,7 @@ class _ServiceViewState extends State<ServiceView> {
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFDC2626),
+                        backgroundColor: const Color(0xFFBA1A1A),
                         foregroundColor: Colors.white,
                         elevation: 0,
                         padding: const EdgeInsets.symmetric(vertical: 14),
@@ -537,7 +528,7 @@ class _ServiceViewState extends State<ServiceView> {
     return Scaffold(
       backgroundColor: const Color(
         0xFF88CEFE,
-      ), // Mengikuti warna atas Dashboard/Layanan Anda
+      ), 
       body: SafeArea(
         bottom: false,
         child: Column(
@@ -605,7 +596,7 @@ class _ServiceViewState extends State<ServiceView> {
                                   ),
                                 ),
                                 const SizedBox(width: 12),
-                                // DIUBAH KE NAVIGASI PUSH FULL SCREEN UNTUK TAMBAH LAYANAN
+                                
                                 InkWell(
                                   onTap: () async {
                                     bool? isChanged = await Navigator.push(
@@ -708,7 +699,7 @@ class _ServiceViewState extends State<ServiceView> {
                                                     style: const TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:
-                                                          FontWeight.w800,
+                                                          FontWeight.w600,
                                                       color: Color(0xFF0056C6),
                                                     ),
                                                   ),
@@ -757,7 +748,4 @@ class _ServiceViewState extends State<ServiceView> {
   }
 }
 
-// ==========================================
-// HALAMAN BARU: TAMBAH LAYANAN FULL SCREEN
-// ==========================================
 

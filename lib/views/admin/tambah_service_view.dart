@@ -78,24 +78,24 @@ class _TambahLayananViewState extends State<TambahLayananView> {
                       buildInputField(
                         label: "Nama Layanan", 
                         controller: nameCtrl, 
-                        hint: "Contoh: Rumah Tangga A",
+                        hint: "Masukkan nama layanan",
                       ),
                       buildInputField(
-                        label: "Batas Minimal Penggunaan (M³)", 
+                        label: "Minimal Penggunaan (M³)", 
                         controller: minUsageCtrl, 
-                        hint: "Contoh: 40",
+                        hint: "Masukkan minimmum pemakaian",
                         type: TextInputType.number,
                       ),
                       buildInputField(
-                        label: "Batas Maksimal Penggunaan (M³)", 
+                        label: "Maksimal Penggunaan (M³)", 
                         controller: maxUsageCtrl, 
-                        hint: "Contoh: 100",
+                        hint: "Masukkan maksimum pemakaian",
                         type: TextInputType.number,
                       ),
                       buildInputField(
-                        label: "Tarif per M³", 
+                        label: "Harga per M³", 
                         controller: priceCtrl, 
-                        hint: "Masukkan nominal tarif", 
+                        hint: "Masukkan harga per m³", 
                         type: TextInputType.number,
                       ),
                     ],
@@ -107,14 +107,19 @@ class _TambahLayananViewState extends State<TambahLayananView> {
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF88CEFE),
-                        foregroundColor: Colors.white,
-                        elevation: 0,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                      ),
+                            backgroundColor: Colors.white,
+                            elevation: 0,
+                            side: const BorderSide(color: Color(0xFF0056C6)),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
                       onPressed: () => Navigator.pop(context, false),
-                      child: const Text("Batal", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+                      child: const Text(
+                            "Batal",
+                            style: TextStyle(color: Color(0xFF0056C6),fontWeight: FontWeight.w700, fontSize: 16),
+                          ),
                     ),
                   ),
                   const SizedBox(width: 16),

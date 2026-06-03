@@ -42,7 +42,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
             flex: 4,
             child: Text(
               label,
-              style: const TextStyle(fontSize: 14, color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500),
             ),
           ),
           Expanded(
@@ -50,7 +50,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
             child: Text(
               value,
               textAlign: TextAlign.end,
-              style: const TextStyle(fontSize: 14, color: Color(0xFF111827), fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 12, color: Color(0xFF111827), fontWeight: FontWeight.w600),
             ),
           ),
         ],
@@ -80,7 +80,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  style: const TextStyle(fontSize: 14, color: Color(0xFF4B5563), height: 1.4),
+                  style: const TextStyle(fontSize: 12, color: Color(0xFF4B5563), height: 1.4),
                   children: [
                     const TextSpan(text: "Apakah Anda yakin ingin menghapus\n"),
                     TextSpan(text: "$custNumber $name?", style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF111827))),
@@ -122,7 +122,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                           Navigator.pop(context, true); 
                         }
                       },
-                      child: const Text("Hapus", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+                      child: const Text("Hapus", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
                     ),
                   ),
                 ],
@@ -170,7 +170,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                         child: Text(
                           "Detail Customer",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Color(0xFF0F172A)),
+                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF0F172A)),
                         ),
                       ),
                     ),
@@ -212,7 +212,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                       const SizedBox(height: 16),
                                       Text(
                                         customerData!["customer_number"] ?? "-",
-                                        style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), fontWeight: FontWeight.w700, letterSpacing: 0.5),
+                                        style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280), fontWeight: FontWeight.w600, letterSpacing: 0.5),
                                       ),
                                       const SizedBox(height: 4),
                                       Text(
@@ -228,14 +228,14 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                   ),
                                 ),
                                 const SizedBox(height: 28),
-                                const Text("Informasi Akun", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Color(0xFF111827))),
+                                const Text("Informasi Akun", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
                                 const SizedBox(height: 12),
                                 buildInfoRow("Username", customerData!["username"] ?? "-"),
                                 buildInfoRow("Nomor Pelanggan (NIK)", customerData!["nik"] ?? customerData!["customer_number"] ?? "-"),
                                 buildInfoRow("Nomor HP", customerData!["phone"] ?? "-"),
                                 buildInfoRow("Alamat", customerData!["address"] ?? "-"),
                                 const SizedBox(height: 24),
-                                const Text("Layanan", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Color(0xFF111827))),
+                                const Text("Layanan", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF111827))),
                                 const SizedBox(height: 12),
                                 Container(
                                   width: double.infinity,
@@ -256,7 +256,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                           children: [
                                             Text(
                                               customerData!["service"]?["name"] ?? "Rumah Tangga A",
-                                              style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w800, color: Colors.white),
+                                              style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.white),
                                             ),
                                             const SizedBox(height: 2),
                                             Text("Min 0 m³ | Maks 10 m³", style: TextStyle(fontSize: 13, color: Colors.white.withOpacity(0.9), fontWeight: FontWeight.w500)),
@@ -311,7 +311,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                           customerData!["name"] ?? "",
                                           customerData!["customer_number"] ?? "",
                                         ),
-                                        child: const Text("Hapus Customer", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+                                        child: const Text("Hapus Customer", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
                                       ),
                                     ),
                                   ],

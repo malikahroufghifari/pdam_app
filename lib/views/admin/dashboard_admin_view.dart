@@ -39,7 +39,6 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
         username = user.username;
       });
 
-      // Melakukan pemanggilan 4 API sekaligus secara bersamaan (Paralel)
       final results = await Future.wait([
         CustomerService().showAll(),
         ServiceService().getAll(),
@@ -71,10 +70,7 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
       setState(() {
         totalCustomer = customers.count ?? 0;
         totalLayanan = services.count ?? 0;
-
-        // Mengambil nilai total data riil dari database counter milik 'bills'
         totalTagihan = bills.count ?? 0;
-
         belumVerifikasi = unverified;
         recentPayments = paymentList.take(4).toList();
         isLoading = false;
@@ -97,6 +93,7 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
     IconData icon,
     Color iconColor,
     Color bgColor,
+    VoidCallback onTap,
   ) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
@@ -147,8 +144,6 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
   Widget _buildPaymentItem(Map<dynamic, dynamic> payment) {
     final paymentId = payment["id"]?.toString() ?? "-";
     final bill = payment["bill"] as Map? ?? {};
-
-    // Perluasan logika pencarian nilai nominal (antisipasi respon API)
     final rawAmount =
         payment["amount"] ??
         payment["total_amount"] ??
@@ -159,11 +154,8 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
         0;
 
     final amount = num.tryParse(rawAmount.toString()) ?? 0;
-
-    // Mengambil bill_id langsung dari data payment, jika tidak ada pakai payment id
     final billId = payment["bill_id"]?.toString() ?? paymentId;
 
-    // Perbaikan Regex: Menambahkan ${m[3]} agar ID asli tidak terpotong
     final invoiceLabel =
         "INV-${billId.padLeft(9, '0').replaceAllMapped(RegExp(r'(\d{3})(\d{3})(\d{3})'), (m) => '${m[1]}-${m[2]}-${m[3]}')}";
 
@@ -196,7 +188,6 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
             child: Row(
               children: [
-                // Expanded agar teks invoice terdorong tanpa menabrak nominal
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,9 +208,10 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
                     ],
                   ),
                 ),
-                // Kolom Nominal dan Status
+
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       currencyFormat.format(amount),
@@ -237,13 +229,13 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFFE4E6),
+                          color: const Color(0xFFFCE4E4),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: const Text(
                           "Menunggu",
                           style: TextStyle(
-                            color: Color(0xFFE11D48),
+                            color: Color(0xFFD9383A),
                             fontSize: 10,
                             fontWeight: FontWeight.w600,
                           ),
@@ -322,8 +314,6 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
                               ),
                               const SizedBox(height: 24),
 
-                              // Baris Pertama Card
-                              // Baris Pertama Card
                               Row(
                                 children: [
                                   Expanded(
@@ -333,6 +323,10 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
                                       Icons.people,
                                       Colors.blue.shade700,
                                       Colors.blue.shade50,
+                                      () => Navigator.pushNamed(
+                                        context,
+                                        '/admin/customer',
+                                      ), // POIN 1
                                     ),
                                   ),
                                   const SizedBox(width: 12),
@@ -343,21 +337,30 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
                                       Icons.check_circle,
                                       Colors.green.shade700,
                                       Colors.green.shade50,
+                                      () => Navigator.pushNamed(
+                                        context,
+                                        '/admin/services',
+                                      ), // POIN 2
                                     ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 12),
 
+                              // Baris Kedua Card Stat (Total Tagihan & Belum Diverifikasi)
                               Row(
                                 children: [
                                   Expanded(
                                     child: _buildStatCard(
                                       "Total\nTagihan",
-                                      totalTagihan, // Menggunakan variabel totalTagihan yang sudah diperbaiki
+                                      totalTagihan,
                                       Icons.receipt_long,
                                       Colors.blueGrey.shade700,
                                       Colors.blueGrey.shade50,
+                                      () => Navigator.pushNamed(
+                                        context,
+                                        '/admin/bills',
+                                      ), // POIN 3
                                     ),
                                   ),
                                   const SizedBox(width: 12),
@@ -368,6 +371,11 @@ class _DashboardAdminViewState extends State<DashboardAdminView> {
                                       Icons.pending_actions,
                                       Colors.orange.shade700,
                                       Colors.orange.shade50,
+                                      () => Navigator.pushNamed(
+                                        context,
+                                        '/admin/bills',
+                                        arguments: 2,
+                                      ),
                                     ),
                                   ),
                                 ],

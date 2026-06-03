@@ -37,6 +37,16 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    // --- KODE BARU UNTUK EDIT NAMA APK (KOTLIN DSL) ---
+    applicationVariants.all {
+        val variant = this
+        variant.outputs.all {
+            val output = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+            output.outputFileName = "PDAM_APP-${variant.name}-${defaultConfig.versionName}.apk"
+        }
+    }
+    // --------------------------------------------------
 }
 
 flutter {

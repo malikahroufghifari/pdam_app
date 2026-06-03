@@ -70,7 +70,6 @@ class _CustomerBillViewState extends State<CustomerBillView> {
   String _determineStatus(Map b) {
     final int billId = b["id"] ?? 0;
 
-    // KUNCI UTAMA: Jika ID tagihan ini ada di list ditolak lokal HP, WAJIB LANGSUNG DITOLAK!
     if (_localRejectedBillIds.contains(billId)) {
       return "DITOLAK (BAYAR ULANG)";
     }
